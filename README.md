@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif" width="600" height="300"/>
+</div>
+
 # FastShop
 
 Gestion d’un **panier d’achat** avec récupération des produits depuis une API **PocketBase** (auto-hébergée).  
