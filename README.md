@@ -30,9 +30,10 @@ Interface en **Svelte + Vite**, logique en **JavaScript**.
 
 ## Stack & Outils
 
-- <img src="https://github.com/devicons/devicon/blob/master/icons/svelte/svelte-original.svg" title="SveltLogo" alt="JavaScript" width="40" height="40"/>&nbsp;
-- [🟨 **JavaScript**](https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg)
-- 🗄️ **PocketBase** (API produits)
+ <img src="https://github.com/devicons/devicon/blob/master/icons/svelte/svelte-original.svg" title="SveltLogo" alt="JavaScript" width="40" height="40"/>&nbsp;
+ <img src="https://github.com/devicons/devicon/blob/master/icons/vitejs/vitejs-original.svg" title="SveltLogo" alt="JavaScript" width="40" height="40"/>&nbsp;
+ <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+<img src="https://logowik.com/content/uploads/images/pocketbase-backend7491.logowik.com.webp" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
 - 💾 **localStorage** (panier côté client)
 
 ---
