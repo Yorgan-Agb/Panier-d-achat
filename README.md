@@ -30,7 +30,7 @@ Interface en **Svelte + Vite**, logique en **JavaScript**.
 
 ## Stack & Outils
 
-- ⚡ **Svelte(https://github.com/devicons/devicon/blob/master/icons/svelte/svelte-original.svg)
+- <img src="https://github.com/devicons/devicon/blob/master/icons/svelte/svelte-original.svg" title="SveltLogo" alt="JavaScript" width="40" height="40"/>&nbsp;
 - [🟨 **JavaScript**](https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg)
 - 🗄️ **PocketBase** (API produits)
 - 💾 **localStorage** (panier côté client)
