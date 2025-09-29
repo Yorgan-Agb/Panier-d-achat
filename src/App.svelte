@@ -1,5 +1,6 @@
 <script>
   import Icon from "@iconify/svelte";
+  import { Card, Button, Rating, Badge } from "flowbite-svelte";
 
   // Déclarer products en tableau vide evolutif
   let products = $state([]);
@@ -81,25 +82,29 @@
   );
 </script>
 
-<header>
-  <h1><span class="lign__title">Fast</span> Shop</h1>
-  <nav class="naviguation">
-    <ul class="filtered__nav">
-      <li><a href="#all">Tous les produits</a></li>
-      <li><a href="#all">Alimentaire</a></li>
-      <li><a href="#all">Gadget</a></li>
-      <!-- svelte-ignore a11y_click_events_have_key_events -->
-      <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-      <li class="cart__logo" onclick={isClicked}>
-        <Icon icon="mdi:cart" width="24" height="24" />
-      </li>
-    </ul>
+<header class=" w-auto shadow-md mb-4">
+  <nav class="flex justify-between items-center h-[4rem]">
+    <h1 class="text-2xl font-bold text-primary-900">
+      Fast<span class=" text-primary-500"> Shop</span>
+    </h1>
+    <div class="flex">
+      <Icon
+        class="text-primary-500"
+        id="cartLogo"
+        icon="mdi:cart"
+        width="24"
+        height="24"
+      />
+      <p class="font-bold text-primary-900">{total.toFixed(2)}</p>
+    </div>
   </nav>
 </header>
 {#if click === true}
   <section class="user__cart__container">
     <div class="all__cart">
-      <h2>Votre <span class="color__cart__title">panier </span></h2>
+      <h2 class="">
+        Votre <span class="color__cart__title">panier </span>
+      </h2>
       {#each userCart as course}
         <article class="user__cart">
           <img src={course.image} alt={course.title} />
@@ -125,180 +130,36 @@
     </div>
   </section>
 {/if}
-<main>
-  <div class="all__products__container">
-    <section class="products__container">
-      {#each products as product}
-        <article class="products__card">
-          <div class="container__products">
-            <h3 class="title__product">{product.title}</h3>
-
-            <img
-              src={product.image}
-              alt={product.title}
-              class="product__image"
-            />
-            <p class="description__card">{product.description}</p>
-            <p class="price__card">{product.price}€</p>
-            <button id="addToCart" onclick={() => addToCart(product.id)}
-              >Ajouter au panier</button
+<main class="p-4">
+  <section class="grid grid-cols-2 gap-2">
+    {#each products as product}
+      <Card class="p-0 ">
+        <img
+          src={product.image}
+          alt={product.title}
+          class="rounded-t-2xl object-cover w-full aspect-square"
+        />
+        <div class="p-1">
+          <h3 class="text-primary-900 font-bold text-left">
+            {product.title}
+          </h3>
+          <p class="text-sm text-left text-gray-500">
+            {product.description}
+          </p>
+          <div class="flex justify-between items-center p-1">
+            <p class="price__card font-bold text-primary-500">
+              {product.price}€
+            </p>
+            <button
+              class="bg-primary-500 rounded-xl"
+              id="addToCart"
+              onclick={() => addToCart(product.id)}
             >
+              <p class="text-xm text-amber-50 font-bold m-2">Ajouter</p>
+            </button>
           </div>
-        </article>
-      {/each}
-    </section>
-  </div>
+        </div>
+      </Card>
+    {/each}
+  </section>
 </main>
-
-<style>
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  h2 {
-    font-size: 2em;
-  }
-  h4 {
-    font-size: 1.5em;
-  }
-  .naviguation {
-    table-layout: fixed;
-  }
-  .lign__title {
-    color: #bd2a2e;
-  }
-  .filtered__nav {
-    list-style-type: none;
-    display: flex;
-    gap: 1em;
-    background-color: white;
-    border-radius: 5px;
-    height: 3em;
-    box-shadow:
-      rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px,
-      rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px,
-      rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    margin: 1em;
-
-    align-items: center;
-  }
-  a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #bd2a2e;
-  }
-
-  .all__products__container {
-    width: 60vw;
-    background-color: #ddd;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-  }
-  main {
-    display: flex;
-    justify-content: center;
-  }
-  .products__container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-  }
-  .products__card {
-    width: 15em;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    background-color: rgb(255, 255, 255);
-    margin: 10px;
-    border-radius: 10px;
-
-    box-shadow:
-      rgba(189, 42, 46, 0.25) 0px 14px 28px,
-      rgba(189, 42, 46, 0.22) 0px 10px 10px;
-    border: 1px solid #bd2a2e;
-  }
-  .container__products {
-    display: flex;
-    flex-direction: column;
-  }
-  .title__product {
-    text-align: center;
-    font-size: 1em;
-    padding: 20px;
-  }
-
-  .description__card {
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .price__card {
-    font-weight: bold;
-    color: #bd2a2e;
-  }
-
-  #addToCart {
-    background-color: #bd2a2e;
-    border: none;
-    height: 3em;
-    font-weight: bold;
-    cursor: pointer;
-    /*  */
-  }
-
-  .cart__logo {
-    cursor: pointer;
-  }
-  .user__cart__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .all__cart {
-    background: #c2c9d6;
-
-    margin-bottom: 10em;
-
-    border-radius: 10px;
-    width: 45vw;
-  }
-  .user__cart {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-
-    background-color: rgb(255, 255, 255);
-    margin-bottom: 10px;
-  }
-  .user__cart img {
-    height: 8em;
-  }
-  .user__cart {
-    width: 40vw;
-    margin-left: 10px;
-  }
-
-  .button__container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .quantity__card {
-    margin: 15px;
-  }
-  .color__cart__title {
-    color: #bd2a2e;
-  }
-  .total__price {
-    color: #bd2a2e;
-  }
-</style>

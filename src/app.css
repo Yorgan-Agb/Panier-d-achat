@@ -1,15 +1,46 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #eeeeee;
+@import "tailwindcss";
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: black;
+@plugin 'flowbite/plugin';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Très clair */
+  --color-primary-50: #f8fafc;
+  --color-primary-100: #f1f5f9;
+  /*background-color*/
+  --color-primary-200: #dce0e8;
+/* Vert principale */
+  --color-primary-500: #059669;
+  /* Vert hoover */
+  --color-primary-600: #047857;
+/* Text-principale*/
+  --color-primary-900: #1E293B;
+/* Rouge principale*/
+--color-red-500:#EF4444;
+/* Red hoover*/
+--color-red-600:#B91C1C;
+ /* second-text-color*/
+  --color-gray-500: #475569;  
+  /*  third-text-color */
+  --color-gray-600: #5d646e;  
+  /* Breakpoint*/
+  --breakpoint-xs: 380px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@source "../node_modules/flowbite-svelte/dist";
+@source "../node_modules/flowbite-svelte-icons/dist";
+
+@layer base {
+  /* disable chrome cancel button */
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
 }

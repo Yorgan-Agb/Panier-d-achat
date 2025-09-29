@@ -15,5 +15,12 @@
     "prettier-plugin-svelte": "^3.4.0",
     "svelte": "^5.28.1",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "flowbite": "^3.1.2",
+    "flowbite-svelte": "^1.15.0",
+    "flowbite-svelte-icons": "^3.0.0",
+    "tailwindcss": "^4.1.13"
   }
 }
