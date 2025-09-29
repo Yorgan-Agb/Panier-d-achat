@@ -1,47 +1,60 @@
-# Svelte + Vite
+<div align="center">
+  <img src="https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif" width="600" height="300"/>
+</div>
 
-This template should help get you started developing with Svelte in Vite.
+# FastShop
 
-## Recommended IDE Setup
+Gestion d’un **panier d’achat** avec récupération des produits depuis une API **PocketBase** (auto-hébergée).  
+Interface en **Svelte + Vite**, logique en **JavaScript**.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+---
 
-## Need an official Svelte framework?
+## Aperçu
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+![demo](./static/fastshop-demo.gif)
+<!-- Remplace le chemin ci-dessus par TON gif (le même que ta capture). 
+     Par ex. mets ton .gif dans /static et garde ce nom, ou change le lien. -->
 
-## Technical considerations
+---
 
-**Why use this over SvelteKit?**
+## Fonctionnalités
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+- Liste de produits (titre, image, description, prix) via **fetch** depuis PocketBase
+- **Ajout au panier** depuis la liste
+- **Quantités dynamiques** (augmenter/diminuer/supprimer)
+- **Total du panier** recalculé en temps réel
+- **Persistance** du panier via `localStorage`
+- Filtrage basique par catégories (optionnel)
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+---
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+## Stack & Outils
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+ <img src="https://github.com/devicons/devicon/blob/master/icons/svelte/svelte-original.svg" title="SveltLogo" alt="JavaScript" width="40" height="40"/>&nbsp;
+ <img src="https://github.com/devicons/devicon/blob/master/icons/vitejs/vitejs-original.svg" title="SveltLogo" alt="JavaScript" width="40" height="40"/>&nbsp;
+ <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+<img src="https://logowik.com/content/uploads/images/pocketbase-backend7491.logowik.com.webp" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+- 💾 **localStorage** (panier côté client)
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+---
 
-**Why include `.vscode/extensions.json`?**
+## Prérequis
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+- **Node.js** 18+ recommandé
+- Un serveur **PocketBase** en local (ou distant) avec une collection `products`
+  - Champs suggérés : `title` (text), `image` (url/file), `description` (text), `price` (number)
 
-**Why enable `checkJs` in the JS template?**
+---
 
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
+## Installation
 
-**Why is HMR not preserving my local component state?**
+```bash
+# Cloner le projet
+git clone https://github.com/<ton-user>/<ton-repo>.git
+cd <ton-repo>
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
+# Installer les dépendances
+npm install
 
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+# Lancer en dev
+npm run dev
