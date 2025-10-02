@@ -1,6 +1,15 @@
 <script>
   import Icon from "@iconify/svelte";
-  import { Card, Button, Rating, Badge } from "flowbite-svelte";
+  import { TrashBinOutline } from "flowbite-svelte-icons";
+
+  import {
+    Card,
+    Img,
+    CloseButton,
+    Button,
+    Rating,
+    Badge,
+  } from "flowbite-svelte";
 
   // Déclarer products en tableau vide evolutif
   let products = $state([]);
@@ -16,7 +25,7 @@
   // Pour le if ouverture du panier
   let click = $state(false);
   const isClicked = () => {
-    click = true;
+    click = !click;
   };
   // Déclaration du panier de l'utilisateur dans le localStorage sous forme de tableau vide
   let userCart = $state(JSON.parse(localStorage.getItem("cart") || "[]"));
@@ -89,41 +98,75 @@
     </h1>
     <div class="flex">
       <Icon
-        class="text-primary-500"
+        class="text-primary-500 cursor-pointer"
         id="cartLogo"
         icon="mdi:cart"
         width="24"
         height="24"
+        onclick={() => isClicked()}
       />
       <p class="font-bold text-primary-900">{total.toFixed(2)}</p>
     </div>
   </nav>
 </header>
 {#if click === true}
-  <section class="user__cart__container">
-    <div class="all__cart">
-      <h2 class="">
-        Votre <span class="color__cart__title">panier </span>
-      </h2>
-      {#each userCart as course}
-        <article class="user__cart">
-          <img src={course.image} alt={course.title} />
-          <h3>{course.title}</h3>
-          <p class="price__card">{course.price}€</p>
+  <section
+    class="w-80 h-70 bg-primary-50 z-1 absolute top-70 bottom-0 left-7 right-0"
+  >
+    <div class="p-4">
+      <CloseButton
+        class="absolute right-2 top-2"
+        onclick={() => (click = false)}
+      />
+      <div class="flex gap-1">
+        <Icon
+          class="text-primary-500"
+          icon="material-symbols:shopping-bag-outline"
+          width="24"
+          height="24"
+        />
+        <h2 class="font-bold text-primary-900">Votre panier</h2>
+        <p class="font-bold text-primary-900">({userCart.length} articles)</p>
+      </div>
 
-          <div class="button__container">
-            <button onclick={() => modifyUserArticleForAdd(course.id)}>+</button
-            >
-            <p class="quantity__card">{course.quantity}</p>
-            <button onclick={() => modifyUserArticleForDecrease(course.id)}
-              >-</button
-            >
-          </div>
-          <button
-            class="delete__cart"
-            onclick={() => deleteUserArticle(course.id)}
-            ><Icon icon="line-md:trash" width="24" height="24" /></button
+      {#each userCart as course}
+        <article class="">
+          <Card
+            class="size-fit flex flex-row justify-center items-center gap-4"
           >
+            <Img
+              src={course.image}
+              class="size-16 object-cover w-full"
+              alt={course.title}
+            />
+            <p
+              class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full"
+            >
+              {course.title}
+            </p>
+            <p class="text-primary-900 font-medium">{course.price}€</p>
+
+            <div class="flex flex-row justify-center items-center">
+              <button
+                class="text-primary-900 font-medium"
+                onclick={() => modifyUserArticleForAdd(course.id)}>+</button
+              >
+              <p class="m-3 text-primary-900 font-medium">{course.quantity}</p>
+              <button
+                class="text-primary-900 font-medium"
+                onclick={() => modifyUserArticleForDecrease(course.id)}
+                >-</button
+              >
+            </div>
+            <button
+              class="delete__cart"
+              onclick={() => deleteUserArticle(course.id)}
+              ><TrashBinOutline
+                size="lg"
+                class="size-20 text-red-500 "
+              /></button
+            >
+          </Card>
         </article>
       {/each}
       <h4>Total : <span class="total__price">{total.toFixed(2)}</span></h4>
