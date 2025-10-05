@@ -110,12 +110,10 @@
   </nav>
 </header>
 {#if click === true}
-  <section
-    class="w-80 h-70 bg-primary-50 z-1 absolute top-70 bottom-0 left-7 right-0"
-  >
-    <div class="p-4">
+  <section class="inset-0 fixed z-50 flex justify-center items-center">
+    <div class="p-4 bg-primary-50">
       <CloseButton
-        class="absolute right-2 top-2"
+        class="w-full flex flex-row-reverse"
         onclick={() => (click = false)}
       />
       <div class="flex gap-1">
@@ -129,46 +127,50 @@
         <p class="font-bold text-primary-900">({userCart.length} articles)</p>
       </div>
 
-      {#each userCart as course}
-        <article class="">
-          <Card
-            class="size-fit flex flex-row justify-center items-center gap-4"
-          >
-            <Img
-              src={course.image}
-              class="size-16 object-cover w-full"
-              alt={course.title}
-            />
-            <p
-              class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full"
+      <div class="max-h-60 overflow-y-auto">
+        {#each userCart as course}
+          <article class="">
+            <Card
+              class="size-fit flex flex-row justify-center items-center gap-4"
             >
-              {course.title}
-            </p>
-            <p class="text-primary-900 font-medium">{course.price}€</p>
+              <Img
+                src={course.image}
+                class="size-16 object-cover "
+                alt={course.title}
+              />
+              <p
+                class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full"
+              >
+                {course.title}
+              </p>
+              <p class="text-primary-900 font-medium">{course.price}€</p>
 
-            <div class="flex flex-row justify-center items-center">
+              <div class="flex flex-row justify-center items-center">
+                <button
+                  class="text-primary-900 font-medium"
+                  onclick={() => modifyUserArticleForAdd(course.id)}>+</button
+                >
+                <p class="m-3 text-primary-900 font-medium">
+                  {course.quantity}
+                </p>
+                <button
+                  class="text-primary-900 font-medium"
+                  onclick={() => modifyUserArticleForDecrease(course.id)}
+                  >-</button
+                >
+              </div>
               <button
-                class="text-primary-900 font-medium"
-                onclick={() => modifyUserArticleForAdd(course.id)}>+</button
+                class="delete__cart"
+                onclick={() => deleteUserArticle(course.id)}
+                ><TrashBinOutline
+                  size="lg"
+                  class="size-20 text-red-500 "
+                /></button
               >
-              <p class="m-3 text-primary-900 font-medium">{course.quantity}</p>
-              <button
-                class="text-primary-900 font-medium"
-                onclick={() => modifyUserArticleForDecrease(course.id)}
-                >-</button
-              >
-            </div>
-            <button
-              class="delete__cart"
-              onclick={() => deleteUserArticle(course.id)}
-              ><TrashBinOutline
-                size="lg"
-                class="size-20 text-red-500 "
-              /></button
-            >
-          </Card>
-        </article>
-      {/each}
+            </Card>
+          </article>
+        {/each}
+      </div>
       <h4>Total : <span class="total__price">{total.toFixed(2)}</span></h4>
     </div>
   </section>
