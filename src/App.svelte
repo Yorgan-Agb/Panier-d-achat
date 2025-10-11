@@ -110,68 +110,87 @@
   </nav>
 </header>
 {#if click === true}
+  <div class="fixed inset-0 bg-black/50 z-40"></div>
   <section class="inset-0 fixed z-50 flex justify-center items-center">
-    <div class="p-4 bg-primary-50">
-      <CloseButton
-        class="w-full flex flex-row-reverse"
-        onclick={() => (click = false)}
-      />
-      <div class="flex gap-1">
-        <Icon
-          class="text-primary-500"
-          icon="material-symbols:shopping-bag-outline"
-          width="24"
-          height="24"
+    <div class=" w-[95%] bg-white rounded-2xl">
+      <div class="p-4">
+        <CloseButton
+          class="w-full flex flex-row-reverse"
+          onclick={() => (click = false)}
         />
-        <h2 class="font-bold text-primary-900">Votre panier</h2>
-        <p class="font-bold text-primary-900">({userCart.length} articles)</p>
-      </div>
+        <div class="flex gap-1 mb-5">
+          <Icon
+            class="text-primary-500"
+            icon="material-symbols:shopping-bag-outline"
+            width="24"
+            height="24"
+          />
+          <h2 class="font-bold text-primary-900">Votre panier</h2>
+          <p class="font-bold text-primary-900">({userCart.length} articles)</p>
+        </div>
 
-      <div class="max-h-60 overflow-y-auto">
-        {#each userCart as course}
-          <article class="">
-            <Card
-              class="size-fit flex flex-row justify-center items-center gap-4"
-            >
-              <Img
-                src={course.image}
-                class="size-16 object-cover "
-                alt={course.title}
-              />
-              <p
-                class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full"
+        <div class="max-h-60 overflow-y-auto">
+          {#each userCart as course}
+            <article class="m-2">
+              <Card
+                class="size-fit flex flex-row justify-center items-center gap-4 bg-primary-50 border-none"
               >
-                {course.title}
-              </p>
-              <p class="text-primary-900 font-medium">{course.price}€</p>
-
-              <div class="flex flex-row justify-center items-center">
-                <button
-                  class="text-primary-900 font-medium"
-                  onclick={() => modifyUserArticleForAdd(course.id)}>+</button
+                <Img
+                  src={course.image}
+                  class="size-16 object-cover "
+                  alt={course.title}
+                />
+                <p
+                  class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full"
                 >
-                <p class="m-3 text-primary-900 font-medium">
-                  {course.quantity}
+                  {course.title}
                 </p>
+                <p class="text-primary-900 font-medium">{course.price}€</p>
+
+                <div class="flex flex-row justify-center items-center">
+                  <button
+                    class="text-primary-900 font-medium"
+                    onclick={() => modifyUserArticleForAdd(course.id)}>+</button
+                  >
+                  <p class="m-3 text-primary-900 font-medium">
+                    {course.quantity}
+                  </p>
+                  <button
+                    class="text-primary-900 font-medium"
+                    onclick={() => modifyUserArticleForDecrease(course.id)}
+                    >-</button
+                  >
+                </div>
                 <button
-                  class="text-primary-900 font-medium"
-                  onclick={() => modifyUserArticleForDecrease(course.id)}
-                  >-</button
+                  class="delete__cart"
+                  onclick={() => deleteUserArticle(course.id)}
+                  ><TrashBinOutline
+                    size="lg"
+                    class="size-20 text-red-500 "
+                  /></button
                 >
-              </div>
-              <button
-                class="delete__cart"
-                onclick={() => deleteUserArticle(course.id)}
-                ><TrashBinOutline
-                  size="lg"
-                  class="size-20 text-red-500 "
-                /></button
-              >
-            </Card>
-          </article>
-        {/each}
+              </Card>
+            </article>
+          {/each}
+        </div>
+        <div class="flex justify-between mt-5 mb-2">
+          <p class="font-bold">Total :</p>
+          <p class="text-primary-500 font-bold">{total.toFixed(2)}€</p>
+        </div>
+        <div class="flex flex-col items-center gap-2 mb-5">
+          <button
+            class=" w-full max-w-96 h-8 border-1 border-solid rounded-sm border-gray-200"
+            onclick={() => (click = false)}
+          >
+            <p class="font-medium">Continuer mes achats</p>
+          </button>
+          <button class="bg-primary-500 w-full max-w-96 h-8 rounded-sm"
+            ><p class="font-medium text-amber-50">
+              Procéder au paiement
+            </p></button
+          >
+        </div>
       </div>
-      <h4>Total : <span class="total__price">{total.toFixed(2)}</span></h4>
     </div>
   </section>
 {/if}
