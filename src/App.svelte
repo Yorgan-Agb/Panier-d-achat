@@ -1,6 +1,11 @@
 <script>
   import Icon from "@iconify/svelte";
-  import { TrashBinOutline } from "flowbite-svelte-icons";
+  import {
+    TrashBinOutline,
+    ShoppingBagSolid,
+    CartSolid,
+  } from "flowbite-svelte-icons";
+  // import { ShoppingBagSolid } from "flowbite-svelte-icons";
 
   import {
     Card,
@@ -93,70 +98,71 @@
 
 <header class=" w-auto shadow-md mb-4">
   <nav class="flex justify-between items-center h-[4rem]">
-    <h1 class="text-2xl font-bold text-primary-900">
+    <h1 class="text-2xl font-bold text-primary-900 lg:text-4xl">
       Fast<span class=" text-primary-500"> Shop</span>
     </h1>
     <div class="flex">
-      <Icon
-        class="text-primary-500 cursor-pointer"
-        id="cartLogo"
-        icon="mdi:cart"
-        width="24"
-        height="24"
+      <CartSolid
+        size="xl"
+        class="text-primary-500 cursor-pointer "
         onclick={() => isClicked()}
       />
-      <p class="font-bold text-primary-900">{total.toFixed(2)}</p>
+
+      <p class="font-bold text-primary-900 lg:text-xl">
+        {total.toFixed(2)} €
+      </p>
     </div>
   </nav>
 </header>
 {#if click === true}
   <div class="fixed inset-0 bg-black/50 z-40"></div>
   <section class="inset-0 fixed z-50 flex justify-center items-center">
-    <div class=" w-[95%] bg-white rounded-2xl">
+    <div class=" w-[95%] bg-white rounded-2xl sm:w-sm lg:w-[80%]">
       <div class="p-4">
         <CloseButton
-          class="w-full flex flex-row-reverse"
+          class="w-full flex flex-row-reverse "
           onclick={() => (click = false)}
         />
         <div class="flex gap-1 mb-5">
-          <Icon
-            class="text-primary-500"
-            icon="material-symbols:shopping-bag-outline"
-            width="24"
-            height="24"
-          />
-          <h2 class="font-bold text-primary-900">Votre panier</h2>
-          <p class="font-bold text-primary-900">({userCart.length} articles)</p>
+          <ShoppingBagSolid class="text-primary-500 lg:h-8 w-8" />
+          <h2 class="font-bold text-primary-900 sm:text-lg lg:text-2xl">
+            Votre panier
+          </h2>
+          <p class="font-bold text-primary-900 sm:text-lg lg:text-2xl">
+            ({userCart.length} articles)
+          </p>
         </div>
 
         <div class="max-h-60 overflow-y-auto">
           {#each userCart as course}
             <article class="m-2">
               <Card
-                class="size-fit flex flex-row justify-center items-center gap-4 bg-primary-50 border-none"
+                class="size-fit flex flex-row justify-center items-center gap-4 bg-primary-50 border-none md-sm: w-full max-w-full"
               >
                 <Img
                   src={course.image}
-                  class="size-16 object-cover "
+                  class="size-16 object-cover sm:w-sm"
                   alt={course.title}
                 />
                 <p
-                  class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full"
+                  class="text-primary-900 font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full lg:text-xl"
                 >
                   {course.title}
                 </p>
-                <p class="text-primary-900 font-medium">{course.price}€</p>
+                <p class="text-primary-900 font-medium lg:text-xl">
+                  {course.price}€
+                </p>
 
                 <div class="flex flex-row justify-center items-center">
                   <button
-                    class="text-primary-900 font-medium"
+                    class="text-primary-900 font-medium lg:text-xl"
                     onclick={() => modifyUserArticleForAdd(course.id)}>+</button
                   >
-                  <p class="m-3 text-primary-900 font-medium">
+                  <p class="m-3 text-primary-900 font-medium lg:text-xl">
                     {course.quantity}
                   </p>
                   <button
-                    class="text-primary-900 font-medium"
+                    class="text-primary-900 font-medium lg:text-xl"
                     onclick={() => modifyUserArticleForDecrease(course.id)}
                     >-</button
                   >
@@ -174,18 +180,20 @@
           {/each}
         </div>
         <div class="flex justify-between mt-5 mb-2">
-          <p class="font-bold">Total :</p>
-          <p class="text-primary-500 font-bold">{total.toFixed(2)}€</p>
+          <p class="font-bold lg:text-xl">Total :</p>
+          <p class="text-primary-500 font-bold lg:text-xl">
+            {total.toFixed(2)}€
+          </p>
         </div>
         <div class="flex flex-col items-center gap-2 mb-5">
           <button
             class=" w-full max-w-96 h-8 border-1 border-solid rounded-sm border-gray-200"
             onclick={() => (click = false)}
           >
-            <p class="font-medium">Continuer mes achats</p>
+            <p class="font-medium lg:text-xl">Continuer mes achats</p>
           </button>
           <button class="bg-primary-500 w-full max-w-96 h-8 rounded-sm"
-            ><p class="font-medium text-amber-50">
+            ><p class="font-medium text-amber-50 lg:text-xl">
               Procéder au paiement
             </p></button
           >
@@ -195,7 +203,7 @@
   </section>
 {/if}
 <main class="p-4">
-  <section class="grid grid-cols-2 gap-2">
+  <section class="grid grid-cols-2 gap-2 lg:grid-cols-3">
     {#each products as product}
       <Card class="p-0 ">
         <img
@@ -204,14 +212,14 @@
           class="rounded-t-2xl object-cover w-full aspect-square"
         />
         <div class="p-1">
-          <h3 class="text-primary-900 font-bold text-left">
+          <h3 class="text-primary-900 font-bold text-left lg:text-lg">
             {product.title}
           </h3>
           <p class="text-sm text-left text-gray-500">
             {product.description}
           </p>
           <div class="flex justify-between items-center p-1">
-            <p class="price__card font-bold text-primary-500">
+            <p class="price__card font-bold text-primary-500 lg:text-lg">
               {product.price}€
             </p>
             <button
@@ -219,7 +227,9 @@
               id="addToCart"
               onclick={() => addToCart(product.id)}
             >
-              <p class="text-xm text-amber-50 font-bold m-2">Ajouter</p>
+              <p class="text-xm text-amber-50 font-bold m-2 lg:text-lg">
+                Ajouter
+              </p>
             </button>
           </div>
         </div>
